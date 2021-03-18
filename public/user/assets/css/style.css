@@ -12,7 +12,10 @@ body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
 }
-
+::selection{
+  background-color: tomato;
+  color: white;
+}
 a {
   color: #e96b56;
   text-decoration: none;

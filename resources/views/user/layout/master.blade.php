@@ -16,6 +16,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+
   <!-- Vendor CSS Files -->
   <link href="{{asset('user/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
   <link href="{{asset('user/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -41,8 +42,8 @@
   <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@ramesh.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+977 9865 62408 85</span></i>
       </div>
       <div class="social-links d-none d-md-flex align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -65,14 +66,14 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="{{Request::is ('/homepage','homepage')?'active':''}}" href="{{route('homepage')}}">Home</a></li>
+          <li><a class="{{Request::is ('/about','about')?'active':''}}" href="{{route('about')}}">About</a></li>
+          <li><a class="{{Request::is ('/services','services')?'active':''}}" href="{{route('services')}}">Services</a></li>
+          <li><a class="{{Request::is ('/portfolio','portfolio')?'active':''}}" href="{{route('portfolio')}}">Portfolio</a></li>
+          <li><a class="{{Request::is ('/team','team')?'active':''}}" href="{{route('team')}}">Team</a></li>
+          <li><a class="{{Request::is ('/pricing','pricing')?'active':''}}" href="{{route('pricing')}}">Pricing</a></li>
+          <li><a class="{{Request::is ('/blog','blog')?'active':''}}" href="{{route('blog')}}">Blog</a></li>
+          <li class="dropdown disabled"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -89,7 +90,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a class="{{Request::is ('/contact','contact')?'active':''}}" href="{{route('contact')}}">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -175,14 +176,14 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Eterna</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Sunlight</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a href="https://bootstrapmade.com/">RameshBaduwal</a>
       </div>
     </div>
   </footer><!-- End Footer -->
