@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
+
+
+//user page
 Route::get('homepage','App\Http\Controllers\UserController@index')->name('homepage');
 //portfolio page
 Route::get('portfolio','App\Http\Controllers\UserController@portfolio')->name('portfolio');
@@ -33,3 +46,6 @@ Route::get('team','App\Http\Controllers\UserController@team')->name('team');
 //blog page
 Route::get('blog','App\Http\Controllers\UserController@blog')->name('blog');
 
+
+// admin page 
+Route::get('/admin/home','App\Http\Controllers\AdminController@index')->name('adminhome');
