@@ -1,4 +1,4 @@
-@extends('admin.hader')
+@extends('admin.header')
 @section('title','admin-home')
 @section('content-section')
 

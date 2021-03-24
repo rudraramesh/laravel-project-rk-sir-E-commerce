@@ -7,7 +7,7 @@
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-  <link rel="shortcut icon" href="img/favicon.png">
+  <link rel="shortcut icon" href="{{asset('admin/img/favicon.png')}}">
 
   <title>@yield('title')</title>
 
@@ -53,7 +53,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+      <a href="{{route('admin.home')}}" class="logo">Nice <span class="lite">Admin</span></a>
       <!--logo end-->
 
       <div class="nav search-row" id="top_menu">
@@ -274,7 +274,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username">{{Auth::user()->name}}</span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">
@@ -323,7 +323,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="index.html">
+            <a class="" href="{{ route('admin.home') }}">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
@@ -335,8 +335,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="form_component.html">Form Elements</a></li>
-              <li><a class="" href="form_validation.html">Form Validation</a></li>
+              <li><a class="" href="{{ route('admin.addcategory') }}">Add Category</a></li>
+              <li><a class="" href="{{route('admin.addproduct')}}">Add Product</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -413,9 +413,9 @@
   <script src="{{asset('admin/js/bootstrap.min.js')}}"></script>
   <!-- nice scroll -->
   <script src="{{asset('admin/js/jquery.scrollTo.min.js')}}"></script>
-  <script src="{{asset('admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="{{asset('admin/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
   <!-- charts scripts -->
-  <script src="assets/jquery-knob/js/jquery.knob.js')}}"></script>
+  <script src="{{asset('admin/assets/jquery-knob/js/jquery.knob.js')}}"></script>
   <script src="{{asset('admin/js/jquery.sparkline.js')}}" type="text/javascript"></script>
   <script src="{{asset('admin/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>
   <script src="{{asset('admin/js/owl.carousel.js')}}"></script>

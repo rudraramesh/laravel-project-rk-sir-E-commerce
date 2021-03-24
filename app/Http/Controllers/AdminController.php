@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
@@ -23,6 +24,17 @@ class AdminController extends Controller
         return view('admin.adminhome');
     }
 
+    public function addcategory()
+    {
+        return view('admin.addcategory');
+    }
+
+    public function addproduct()
+    {
+        $category=Category::orderBy('id','asc')->get();
+        return view('admin.addproduct',['category'=>$category]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +53,12 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        category::create([
+            'category_name'=>$request->get('cname')
+        ]);
+
+        $request->session()->flash('message','Category has been added successfully');
+        return redirect()->back();
     }
 
     /**
@@ -50,9 +67,10 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $showdata=category::orderBy('id','desc')->get();
+        return view('admin.addcategory',['showdata'=>$showdata]);
     }
 
     /**
@@ -63,7 +81,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+       $category=category::find($id);
+        return view('admin.editcategory',compact('category'));
     }
 
     /**
@@ -75,7 +94,14 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category=category::find($id);
+
+        $category->update([
+         'category_name'=>$request->get('cname')
+        ]);
+        $request->session()->flash('message','Category has Been updated successfully');
+
+        return redirect()->route('admin.addcategory');
     }
 
     /**
@@ -84,8 +110,12 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
-    }
+        $category=category::find($id);
+
+        $category->delete();
+        $request->session()->flash('message','category has been delete successfully');
+        return redirect()->back();
+}
 }

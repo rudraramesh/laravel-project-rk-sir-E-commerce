@@ -48,4 +48,21 @@ Route::get('blog','App\Http\Controllers\UserController@blog')->name('blog');
 
 
 // admin page 
-Route::get('/admin/home','App\Http\Controllers\AdminController@index')->name('adminhome');
+Route::get('/admin/home','App\Http\Controllers\AdminController@index')->name('admin.home');
+
+//admin add category
+Route::get('/admin/addcategory','App\Http\Controllers\AdminController@addcategory')->name('admin.addcategory');
+
+Route::post('/admin/storecategory','App\Http\Controllers\AdminController@store')->name('admin.storecategory');
+
+Route::get('/admin/addcategory','App\Http\Controllers\AdminController@show')->name('admin.addcategory');
+
+Route::get('/admin/deletecategory/{id}','App\Http\Controllers\AdminController@destroy')->name('admin.deletecategory');
+
+
+Route::get('/admin/editcategory{id}','App\Http\Controllers\AdminController@edit')->name('admin.editcategory');
+
+Route::post('/admin/updatecategory/{id}','App\Http\Controllers\AdminController@update')->name('admin.updatecategory');
+
+//admin add product
+Route::get('/admin/addproduct','App\Http\Controllers\AdminController@addproduct')->name('admin.addproduct');
