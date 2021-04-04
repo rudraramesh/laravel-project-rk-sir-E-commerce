@@ -85,10 +85,11 @@
                       <label for="category" class="control-label col-lg-2">Category <span class="required">*</span></label>
                       <div class="col-lg-10">
                         <select class="form-control" name="category">
-                        {{--   @foreach($category as $c)
-                          <option value="{{$c->id}}">{{$c->category_name}}</option>
+                          <option value="{{$product->category_id}}">{{$product->category->category_name}}</option>
+                            @foreach($category as $c) 
+                           <option value="{{$c->id}}">{{$c->category_name}}</option>
 
-                          @endforeach --}}
+                          @endforeach  
                         </select>
                       </div>
                     </div>

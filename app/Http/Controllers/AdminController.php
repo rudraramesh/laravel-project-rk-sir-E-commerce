@@ -161,12 +161,12 @@ class AdminController extends Controller
     {
         $category=Category::orderBy('id','asc')->get();
         $product=Product::find($id);
-        return view('admin.editproduct',compact('product'));
+        return view('admin.editproduct',compact('category','product'));
     }
 
     public function updateproduct(Request $request, $id)
     {
-         $product=product::find($id);
+         $product=Product::find($id);
         if ($request->hasFile('image')) {
             $file=$request->file('image');
             $image=mt_rand(10001,9999999).'_'.$file->
@@ -228,7 +228,10 @@ class AdminController extends Controller
     public function destroyproduct(Request $request, $id)
     {
         $product=product::find($id);
-
+        if($product->product_image){
+        // to remove image form folder
+        unlink('admin/upload/products/'.$product->product_image);
+          }
         $product->delete();
         $request->session()->flash('message','product has been delete successfully');
         return redirect()->back();
