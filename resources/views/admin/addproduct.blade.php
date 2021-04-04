@@ -17,6 +17,22 @@
           </div>
         </div>
 
+<div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Show Product List
+                <div style="float: right; margin-right: 200px;" class="form-group">
+              <div class="col-lg-offset-2 col-lg-10">
+               <a href="{{ route('admin.showproduct') }}"> <button class="btn btn-primary" type="submit"> Show Product List</button></a>
+              </div>
+            </div>
+              </header>
+  
+        </section>
+    </div>
+</div>
+
 
 <div class="row">
           <div class="col-lg-12">
@@ -24,9 +40,16 @@
               <header class="panel-heading">
                 Add Product Form
               </header>
+               @if(Session::has('message'))
+                  <div class="alert alert-success">
+                    {{Session::get('message')}}
+                  </div>
+                  @endif
               <div class="panel-body">
                 <div class="form">
-                  <form class="form-validate form-horizontal " id="register_form" method="get" action="">
+                 
+                  <form class="form-validate form-horizontal " id="register_form" method="POST" action="{{ route('admin.storeproduct') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group ">
                       <label for="productname" class="control-label col-lg-2">Product name <span class="required">*</span></label>
                       <div class="col-lg-10">
@@ -64,7 +87,6 @@
                         <select class="form-control" name="category">
                           @foreach($category as $c)
                           <option value="{{$c->id}}">{{$c->category_name}}</option>
-
                           @endforeach
                         </select>
                       </div>
@@ -72,7 +94,7 @@
                     
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-primary" type="submit">Add Product</button>
                         <button class="btn btn-default" type="button">Cancel</button>
                       </div>
                     </div>
@@ -82,6 +104,18 @@
             </section>
           </div>
         </div>
+
+      
+
+                </tbody>
+              </table>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+
       </section>
     </section>
 

@@ -72,6 +72,11 @@
                   </div>
                 </div>
               </div>
+               @if(Session::has('message'))
+                  <div class="alert alert-success">
+                    {{Session::get('message')}}
+                  </div>
+                  @endif
               <table class="table table-striped table-advance table-hover">
                 <tbody>
 
@@ -95,7 +100,7 @@
                       <div class="btn-group">
                         <a class="btn btn-primary" href="{{route('admin.editcategory',$s->id)}}" title="edit category"><i class="icon_plus_alt2"></i></a>
                         <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                        <a class="btn btn-danger" href="{{route('admin.deletecategory',$s->id)}}" title="delete category"><i class="icon_close_alt2"></i></a>
+                        <a class="btn btn-danger" href="{{route('admin.deletecategory',$s->id)}}" onclick="return confirm('are you sure delete')" title="delete category"><i class="icon_close_alt2"></i></a>
                       </div>
                     </td>
                   </tr>

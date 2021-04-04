@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\UsersendMessage;
+use App\Models\Tags;
+use App\Models\AfterAddProduct;
 
 class AdminController extends Controller
 {
@@ -29,12 +33,67 @@ class AdminController extends Controller
         return view('admin.addcategory');
     }
 
+
+    public function addtags()
+    {
+        $showtag=Tags::orderBy('id','desc')->get();
+        return view('admin.addtags',['showtag'=>$showtag]);
+    }
+
+    public function storetags(Request $request)
+    {
+        Tags::create([
+            'tags_name'=>$request->get('tname'),
+        ]);
+        $request->session()->flash('msg','Tags Is Added');
+        return redirect()->back();
+    }
+
     public function addproduct()
     {
         $category=Category::orderBy('id','asc')->get();
         return view('admin.addproduct',['category'=>$category]);
     }
 
+
+    public function storeproduct(Request $request)
+    {
+        $image=null;
+        if ($request->hasFile('image')) {
+            $file=$request->file('image');
+            $image=mt_rand(10001,9999999).'_'.$file->
+            getClientOriginalName();
+            $file->move('admin/upload/products/',$image);
+        }
+        product::create([
+        'product_name'=>$request->get('pname'),
+        'product_price'=>$request->get('price'),
+        'product_quantity'=>$request->get('quantity'),
+        'product_description'=>$request->get('description'),
+        'product_image'=>$image,
+        'category_id'=>$request->get('category')
+
+        ]);
+        $request->session()->flash('message','product has been added successfully');
+        return redirect()->route('admin.afteraddproduct');
+    }
+
+    public function afteraddproduct()
+    {
+        $afteraddpro=Category::orderBy('id','asc')->get();
+        $afteraddprod=Tags::orderBy('id','asc')->get();
+        return view('admin.afteraddproduct',['afteraddpro'=>$afteraddpro],['afteraddprod'=>$afteraddprod]);
+    }
+
+    public function storeafteraddproduct(Request $request)
+    {
+        AfterAddProduct::create([
+        'category_names'=>$request->get('category'),
+        'tag_names'=>$request->get('tag'),
+        ]);
+        $request->session()->flash('msg','product has been added successfully');
+        return redirect()->route('admin.showproduct');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -73,6 +132,19 @@ class AdminController extends Controller
         return view('admin.addcategory',['showdata'=>$showdata]);
     }
 
+    public function showproduct()
+    {
+        $showproduct=Product::orderBy('id','desc')->get();
+        return view('admin.showproduct',['showproduct'=>$showproduct]);
+    }
+
+//user send message
+    public function usersendmessage()
+    {
+        $showusermessage=usersendmessage::orderBy('id','desc')->get();
+        return view('admin.usersendmessage',['showusermessage'=>$showusermessage]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,6 +155,41 @@ class AdminController extends Controller
     {
        $category=category::find($id);
         return view('admin.editcategory',compact('category'));
+    }
+
+    public function editproduct($id)
+    {
+        $category=Category::orderBy('id','asc')->get();
+        $product=Product::find($id);
+        return view('admin.editproduct',compact('product'));
+    }
+
+    public function updateproduct(Request $request, $id)
+    {
+         $product=product::find($id);
+        if ($request->hasFile('image')) {
+            $file=$request->file('image');
+            $image=mt_rand(10001,9999999).'_'.$file->
+            getClientOriginalName();
+            $file->move('admin/upload/products/',$image);
+
+            if ($product->product_image) {
+            //to remove image for folder
+            unlink('admin/upload/products/'.$product->product_image);
+        }
+        $product->product_image=$image;
+        }
+
+        $product->update([
+            'product_name'=>$request->get('pname'),
+            'product_price'=>$request->get('price'),
+            'product_quantity'=>$request->get('quantity'),
+            'product_description'=>$request->get('description'),
+            'product_image'=>$image,
+            'category_id'=>$request->get('category')
+        ]);
+        $request->session()->flash('updatemessage','Product Has Been Update Successfully');
+        return redirect()->route('admin.showproduct');
     }
 
     /**
@@ -116,6 +223,14 @@ class AdminController extends Controller
 
         $category->delete();
         $request->session()->flash('message','category has been delete successfully');
+        return redirect()->back();
+}
+    public function destroyproduct(Request $request, $id)
+    {
+        $product=product::find($id);
+
+        $product->delete();
+        $request->session()->flash('message','product has been delete successfully');
         return redirect()->back();
 }
 }
