@@ -68,6 +68,7 @@ Route::get('/editprofile/{id}','App\Http\Controllers\UserController@editprofile'
 Route::post('/updateprofile/{id}','App\Http\Controllers\UserController@updateprofile')->name('updateprofile');
 //show profile
 Route::get('/showprofile','App\Http\Controllers\UserController@showprofile')->name('showprofile');
+Route::get('/productbycategory/{id}','App\Http\Controllers\UserController@productbycategory')->name('productbycategory');
 
 
 

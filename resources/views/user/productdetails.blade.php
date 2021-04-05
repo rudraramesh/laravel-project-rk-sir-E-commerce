@@ -153,12 +153,13 @@
 
               <h3 class="sidebar-title">Categories</h3>
               <div class="sidebar-item categories">
-              	@foreach($category as $ct)
                 <ul>
-                  <li><a href="#">{{$ct->category_name}} <span>(25)</span></a></li>
+              	@foreach($categorys as $ct)
+
+                  <li><a href="{{route('productbycategory',$ct->id)}}">{{$ct->category_name}} <span>({{$ct->products_count}})</span></a></li>
+                @endforeach
                   
                 </ul>
-                @endforeach
               </div><!-- End sidebar categories-->
 
               <h3 class="sidebar-title">Archive Post</h3>

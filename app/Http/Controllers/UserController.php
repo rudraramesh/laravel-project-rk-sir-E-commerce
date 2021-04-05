@@ -159,11 +159,13 @@ class UserController extends Controller
     {
         $details=Product::find($id);
         $recent=Product::orderBy('id','desc')->limit(5)->get();
+        $categorys=Category::withCount('products')->get();
+        // yauta category vitra kati wota post xa vane count garna lai "withCount" gareko
         $category=Category::orderBy('id','desc')->limit(10)->get();
         $showcomment=ProductComment::orderBy('id','desc')->get();
         $showtags=Tags::orderBy('id','asc')->get();
 
-        return view('user.productdetails',compact('details','recent','showcomment','category','showtags'));
+        return view('user.productdetails',compact('details','recent','showcomment','category','showtags','categorys'));
     }
 
     public function search(Request $request)
@@ -171,6 +173,12 @@ class UserController extends Controller
         $searchitem=$request->get('search');
         $result=Product::orderBy('id','desc')->where('product_name','like','%'.$searchitem.'%')->get();
         return view('user.searchproduct',['result'=>$result]);
+    }
+
+    public function productbycategory($id)
+    {
+        $categorys=Category::find($id);
+        return view('user.productbycategory',['categorys'=>$categorys]);
     }
 
     public function storeproductcomment(Request $request)
