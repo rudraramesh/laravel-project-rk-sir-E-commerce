@@ -1,5 +1,5 @@
 @extends('user.layout.master')
-@section('title','product details')
+@section('title',$details->product_name)
 @section('content-section')
 
 
@@ -44,7 +44,7 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="">{{Auth::user()->name}}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="">{{Auth::User()->name}}</a></li>
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{$details->created_at}}</time></a></li>
                   <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
                 </ul>
@@ -180,13 +180,15 @@
               </div><!-- End sidebar recent posts-->
 
               <h3 class="sidebar-title">Tags</h3>
-              @foreach($showtags as $tag)
               <div class="sidebar-item tags">
                 <ul>
+              @foreach($showtags as $tag)
+                  
                   <li><a href="#">{{$tag->tags_name}}</a></li>
+              @endforeach
+
                 </ul>
               </div><!-- End sidebar tags-->
-              @endforeach
 
             </div><!-- End sidebar -->
           </div><!-- End blog sidebar -->

@@ -53,9 +53,9 @@
             <div style="margin-top: 50px;" class="portfolio-wrap">
               <img src="{{asset('admin/upload/products')}}/{{$search->product_image}}" class="img-fluid img" alt="">
               <div class="portfolio-info">
-                <p>
+               <a href="{{ route('productdetails',[$search->id]) }}"> <p>
                   {{Str::limit($search->product_description, $limit = 50)}}
-                </p>
+                </p></a>
                 <div class="portfolio-links">
                   <a href="{{asset('admin/upload/products')}}/{{$search->product_image}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{$search->product_name}}"><i class="bx bx-plus"></i></a>
                   <a href="{{ route('productdetails',[$search->id]) }}" title="More Details"><i class="bx bx-link"></i></a>
@@ -63,7 +63,7 @@
               </div>
             </div><br>
             <div class="namess">
-                  <a href="#"><h6 style="text-align: center;">{{$search->product_name}}</h6></a>
+                  <a href="{{ route('productdetails',[$search->id]) }}"><h6 style="text-align: center;">{{$search->product_name}}</h6></a>
                   </div>
 
             <div class="namess">

@@ -1,12 +1,20 @@
 @extends('user.layout.master')
-@section('title','Product by category')
+@section('title','Search product')
 @section('content-section')
 
 
 <style>
   .img{
-    height: 400px;
-    width:100%;
+    height: 200px;
+    width:200px;
+  }
+  .namess{
+    text-align: center;
+  }
+  .namess:hover a{
+    color: red;
+    text-align: center;
+
   }
   .portfolio-wrap{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -15,21 +23,10 @@
 </style>
   <main id="main">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div style="position: absolute;" class="container">
-
-        <ol>
-          <li><a href="index.html">Home</a></li>
-          <li>Product</li>
-        </ol>
-    </div>
-    </section>
-
-      <div style="margin-left:500px; " class="container" data-aos="fade-up">
+<div class="container" data-aos="fade-up">
 
         <div class="row">
-          <div class="col-lg-8 entries">
+          <div style="margin-left:500px;margin-top: 20px; " class="col-lg-8 entries">
           <div class="col-lg-4">
 
         <div class="sidebar">
@@ -37,7 +34,7 @@
               <div class="sidebar-item search-form">
                 <form action="{{route('searchproduct')}}">
                   @csrf
-                  <input type="text" name="search" placeholder="search product">
+                  <input type="text" name="search" placeholder="search product here">
                   <button type="submit"><i class="bi bi-search"></i></button>
                 </form>
               </div>
@@ -46,33 +43,33 @@
           </div>
         </div>
       </div>
-
-      </div>
-     
-
-    </section><!-- End Breadcrumbs -->
-
-
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio mt-5">
+    <section id="portfolio" class="portfolio">
       <div class="container">
 
         <div class="row portfolio-container">
-                  @foreach($categorys->products as $product)
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="{{asset('admin/upload/products')}}/{{$product->product_image}}" class="img-fluid img" alt="">
+                  @foreach($categorys->products as $categorytopost)
+          <div class="col-lg-2 col-md-6 portfolio-item filter-app">
+            <div style="margin-top: 50px;" class="portfolio-wrap">
+              <img src="{{asset('admin/upload/products')}}/{{$categorytopost->product_image}}" class="img-fluid img" alt="">
               <div class="portfolio-info">
-                <h4>{{$product->product_name}}</h4>
-                <p>
-                   {{Str::limit($product->product_description, $limit = 100)}} 
-                </p>
+                <a href="{{ route('productdetails',[$categorytopost->id]) }}"><p>
+                  {{Str::limit($categorytopost->product_description, $limit = 50)}}
+                </p></a>
                 <div class="portfolio-links">
-                  <a href="{{asset('admin/upload/products')}}/{{$product->product_image}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{$product->product_name}}"><i class="bx bx-plus"></i></a>
-                  <a href="{{ route('productdetails',[$product->id]) }}" title="More Details"><i class="bx bx-link"></i></a>
+                  <a href="{{asset('admin/upload/products')}}/{{$categorytopost->product_image}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{$categorytopost->product_name}}"><i class="bx bx-plus"></i></a>
+                  <a href="{{ route('productdetails',[$categorytopost->id]) }}" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
-            </div>
+            </div><br>
+            <div class="namess">
+                  <a href="{{ route('productdetails',[$categorytopost->id]) }}"><h6 style="text-align: center;">{{$categorytopost->product_name}}</h6></a>
+                  </div>
+
+            <div class="namess">
+                  <a href="{{ route('productdetails',[$categorytopost->id]) }}"><h6 class="btn btn-primary" style="text-align: center;">Read More</h6></a>
+                  </div>
+
           </div>
          @endforeach
         </div>
@@ -82,7 +79,6 @@
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients">
       <div class="container">
-
         <div class="section-title">
           <h2>Clients</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
@@ -109,3 +105,4 @@
 
 
 @endsection
+

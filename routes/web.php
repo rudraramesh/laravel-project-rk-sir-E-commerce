@@ -120,5 +120,10 @@ Route::post('/admin/storetags','App\Http\Controllers\AdminController@storetags')
 Route::get('/admin/afteraddproduct','App\Http\Controllers\AdminController@afteraddproduct')->name('admin.afteraddproduct');
 //store add product
 Route::post('/admin/storeafteraddproduct','App\Http\Controllers\AdminController@storeafteraddproduct')->name('admin.storeafteraddproduct');
+// store post
+Route::post('/admin/storequickpost','App\Http\Controllers\AdminController@storequickpost')->name('admin.storequickpost');
+//contact
+Route::get('/admin/contact','App\Http\Controllers\AdminController@contact')->name('admin.contact');
+Route::post('/admin/storeAdminMessage','App\Http\Controllers\AdminController@storeAdminMessage')->name('admin.storeAdminMessage');
 
 

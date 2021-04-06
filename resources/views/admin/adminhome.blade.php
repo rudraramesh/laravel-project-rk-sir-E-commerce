@@ -441,7 +441,7 @@
                   <div class="col-lg-4">
                     <span class="profile-ava pull-right">
                                         <img alt="" class="simple" src="{{asset('admin/img/avatar1_small.jpg')}}">
-                                        Jenifer smith
+                                        {{Auth::User()->name}}
                                 </span>
                   </div>
                 </div>
@@ -594,39 +594,43 @@
 
                   <div class="form quick-post">
                     <!-- Edit profile form (not working)-->
-                    <form class="form-horizontal">
+                      @if(Session::has('msg'))
+                  <div class="alert alert-success">
+                    {{Session::get('msg')}}
+                  </div>
+                  @endif
+                    <form class="form-horizontal" action="{{ route('admin.storequickpost') }}" method="POST">
+                      @csrf
                       <!-- Title -->
                       <div class="form-group">
                         <label class="control-label col-lg-2" for="title">Title</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="title">
+                          <input type="text" class="form-control" id="title" placeholder="Title Hare" name="title">
                         </div>
                       </div>
                       <!-- Content -->
                       <div class="form-group">
                         <label class="control-label col-lg-2" for="content">Content</label>
                         <div class="col-lg-10">
-                          <textarea class="form-control" id="content"></textarea>
+                          <textarea class="form-control" id="content" name="content"></textarea>
                         </div>
                       </div>
                       <!-- Cateogry -->
                       <div class="form-group">
                         <label class="control-label col-lg-2">Category</label>
                         <div class="col-lg-10">
-                          <select class="form-control">
-                                                  <option value="">- Choose Cateogry -</option>
-                                                  <option value="1">General</option>
-                                                  <option value="2">News</option>
-                                                  <option value="3">Media</option>
-                                                  <option value="4">Funny</option>
-                                                </select>
+                          <select class="form-control" name="category">
+                          @foreach($category as $c)
+                          <option value="{{$c->id}}">{{$c->category_name}}</option>
+                          @endforeach
+                        </select>
                         </div>
                       </div>
                       <!-- Tags -->
                       <div class="form-group">
                         <label class="control-label col-lg-2" for="tags">Tags</label>
                         <div class="col-lg-10">
-                          <input type="text" class="form-control" id="tags">
+                          <input type="text" class="form-control" id="tags" name="tags">
                         </div>
                       </div>
 

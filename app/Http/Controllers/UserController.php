@@ -110,7 +110,7 @@ class UserController extends Controller
             'your_subject'=>$request->get('subject'),
             'your_message'=>$request->get('message')
         ]);
-        $request->session()->flash('msg','Check Your Email Your Message Reply After 1 hour Thank you');
+        $request->session()->flash('msg','Check Your Email After 1 hour Your Message Reply Thank you');
         return redirect()->back();
     }
 

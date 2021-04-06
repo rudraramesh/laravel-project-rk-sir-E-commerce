@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\UsersendMessage;
 use App\Models\Tags;
 use App\Models\AfterAddProduct;
+use App\Models\QuickPost;
+use App\Models\AdminSendMessage;
 
 class AdminController extends Controller
 {
@@ -25,14 +27,18 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.adminhome');
+       $category=Category::orderBy('id','asc')->get();
+        return view('admin.adminhome',['category'=>$category]);
     }
 
     public function addcategory()
     {
         return view('admin.addcategory');
     }
-
+    public function contact()
+    {
+        return view('admin.contact');
+    }
 
     public function addtags()
     {
@@ -93,6 +99,28 @@ class AdminController extends Controller
         ]);
         $request->session()->flash('msg','product has been added successfully');
         return redirect()->route('admin.showproduct');
+    }
+    public function storequickpost(Request $request)
+    {
+        QuickPost::create([
+        'title'=>$request->get('title'),
+        'content'=>$request->get('content'),
+        'category'=>$request->get('category'),
+        'tags'=>$request->get('tags'),
+        ]);
+        $request->session()->flash('msg','post has been Public successfully');
+        return redirect()->back();
+    }
+    public function storeAdminMessage(Request $request)
+    {
+        AdminSendMessage::create([
+        'your_name'=>$request->get('name'),
+        'your_email'=>$request->get('email'),
+        'subject'=>$request->get('subject'),
+        'message'=>$request->get('message'),
+        ]);
+        $request->session()->flash('msg','Your message has been sent. Waiting for reply after 3 hours');
+        return redirect()->back();
     }
     /**
      * Show the form for creating a new resource.
