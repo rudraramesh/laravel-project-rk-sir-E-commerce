@@ -51,7 +51,7 @@ Route::post('/storemessage','App\Http\Controllers\UserController@storemessage')-
 //user login
 Route::get('/userregister','App\Http\Controllers\UserController@userregister')->name('userregister');
 Route::post('/storeregister','App\Http\Controllers\UserController@storeregister')->name('storeregister');
-Route::get('/userlogins','App\Http\Controllers\UserController@userlogins')->name('userlogins');
+
 //product details
 Route::get('/productdetails/{id}','App\Http\Controllers\UserController@productdetails')->name('productdetails');
 // product comment
@@ -62,13 +62,33 @@ Route::get('/showcomment','App\Http\Controllers\UserController@showcomment')->na
 Route::get('/searchresult','App\Http\Controllers\UserController@search')->name('searchproduct');
 // my profile
 Route::get('/myprofile','App\Http\Controllers\UserController@myprofile')->name('myprofile');
-//edit profile
-Route::get('/editprofile/{id}','App\Http\Controllers\UserController@editprofile')->name('editprofile');
+
 //update profile
 Route::post('/updateprofile/{id}','App\Http\Controllers\UserController@updateprofile')->name('updateprofile');
-//show profile
-Route::get('/showprofile','App\Http\Controllers\UserController@showprofile')->name('showprofile');
+//product by category
 Route::get('/productbycategory/{id}','App\Http\Controllers\UserController@productbycategory')->name('productbycategory');
+//user signup form
+Route::get('/signup','App\Http\Controllers\UserController@signupform')->name('signup');
+//store customer
+Route::post('/storecustomer','App\Http\Controllers\UserController@storecustomer')->name('storecustomer');
+//user login form
+Route::get('/userlogins','App\Http\Controllers\UserController@userlogins')->name('userlogins');
+//user login check
+Route::post('/userlogincheck','App\Http\Controllers\UserLoginController@userlogin')->name('userlogincheck');
+
+//user logout
+Route::get('/userlogout','App\Http\Controllers\UserLoginController@userlogout')->name('userlogout');
+
+//user profile
+Route::get('/userprofile/{id}','App\Http\Controllers\UserLoginController@userprofile')->name('userprofile');
+
+//update profile user
+Route::post('/userprofileupdate','App\Http\Controllers\UserLoginController@userprofileupdate')->name('userprofileupdate');
+
+//edit profile
+Route::get('editprofile/{id}','App\Http\Controllers\UserLoginController@editprofile')->name('editprofile');
+Route::post('profileupdate/{id}','App\Http\Controllers\UserLoginController@updateprofile')->name('updateprofile');
+
 
 
 

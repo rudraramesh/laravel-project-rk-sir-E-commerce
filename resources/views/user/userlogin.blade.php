@@ -19,20 +19,20 @@
     <section style="margin-left:400px;" id="contact" class="contact">
       <div class="container">
 <div class="col-lg-6">
-          @if(Session::has('msg'))
-          <div class="alert alert-success">
-          {{Session::get('msg')}}
+          @if(Session::has('error'))
+          <div class="alert alert-danger">
+          {{Session::get('error')}}
           </div>
           @endif
-            <form style="height:400px;" action="{{route('userlogins')}}" method="POST" class="php-email-form">
+            <form style="height:400px;" action="{{route('userlogincheck')}}" method="POST" class="php-email-form">
             @csrf
               <div class="row">
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" value="{{__('email')}}" name="email" id="subject" placeholder="Email" required>
+                <input type="text" class="form-control" name="email" id="subject" placeholder="Email" required>
               </div>
               <div class="form-group mt-3">
-                <input type="password" class="form-control" value="{{__('password')}}" name="password" id="subject" placeholder="password" required>
+                <input type="password" class="form-control" name="password" id="subject" placeholder="password" required>
               </div>
               
               <div class="my-3">

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductComment;
 use App\Models\Tags;
+use App\Models\Customer;
 
 class UserController extends Controller
 {
@@ -63,15 +64,10 @@ class UserController extends Controller
     {
         // $profile=UserRegisterLogin::find($id);
         // return view('user.myprofile',compact('profile'));
-        $profiles=UserRegisterLogin::orderBy('id','desc')->limit(1)->get();
+        $profiles=Customer::orderBy('id','desc')->limit(1)->get();
         return view('user.myprofile',['profiles'=>$profiles]);
     }
-    public function editprofile($id)
-    {
-         $editprofile=UserRegisterLogin::find($id);
-         return view('user.editprofile',compact('editprofile'));
-        
-    }
+    
     public function updateprofile(Request $request, $id)
     {
          $profile=UserRegisterLogin::find($id);
@@ -96,6 +92,21 @@ class UserController extends Controller
         //
     }
 
+    public function signupform()
+    {
+        return view('user.signup');
+    }
+
+    public function storecustomer(Request $request)
+    {
+         Customer::create([
+            'name'=>$request->get('name'),
+            'email'=>$request->get('email'),
+            'password'=>bcrypt($request->get('pass'))
+        ]);
+        $request->session()->flash('msg','Account has been created successfully');
+        return redirect()->back();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -129,13 +140,6 @@ class UserController extends Controller
         $request->session()->flash('msg','register successfully');
         return redirect()->route('myprofile');
     }
-    public function showprofile()
-    {
-         $showprofile=userregisterlogin::orderBy('id','desc')->limit(1)->get();
-         return view('user.showprofile',['showprofile'=>$showprofile]);
-
-        
-    }
 
 
     //  public function userlogin(Request $request, $id)
@@ -150,10 +154,10 @@ class UserController extends Controller
     //      return redirect()->back();
 
     //  }
-    public function userlogins()
-    {
-        return view('user.userlogin');
-    }
+     public function userlogins()
+     {
+         return view('user.userlogin');
+     }
 
     public function productdetails($id)
     {

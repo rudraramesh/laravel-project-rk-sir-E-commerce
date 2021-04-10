@@ -1,5 +1,5 @@
 @extends('user.layout.master')
-@section('title','Register')
+@section('title','User-Register')
 @section('content-section')
 
 
@@ -47,7 +47,7 @@
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
               <div style="float:left; margin-left:10px;" class="text-center"><button type="submit">Register</button></div>
-              <a style="float:right;margin-right:50px;color:green; padding-top:10px;" href="{{route('userlogins')}}">already register Login</a>
+              <a style="float:right;margin-right:50px;color:green; padding-top:10px;" href="#">already register Login</a>
             </form>
           </div>
 </div>

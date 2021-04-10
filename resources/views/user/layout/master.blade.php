@@ -47,9 +47,16 @@
       </div>
       <div class="social-links d-none d-md-flex align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> &nbsp;
+        @guest('myweb')
+        <a href="{{route('signup')}}" style="color: tomato;" class="instagram">SignUP</a> &nbsp;
+        <a href="{{ route('userlogins') }}" style="color: orange;" class="linkedin">SignIn</a>&nbsp;
+        @endguest
+        @auth('myweb')
+        &nbsp; <a href="{{ route('userprofile',Auth::guard('myweb')->user()->id) }}" style="color:tomato;">{{Auth::guard('myweb')->user()->name}}</a>
+        <a href="{{ route('userlogout') }}" style="color: orange;" class="instagram">Logout</a>
+
+        @endauth
       </div>
     </div>
   </section>
@@ -75,9 +82,9 @@
           <li><a class="{{Request::is ('/blog','blog')?'active':''}}" href="{{route('blog')}}">Blog</a></li>
           <li class="dropdown disabled"><a href="#"><span>My Account</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{{route('userlogins')}}">Login</a></li>
+              <li><a href="{{ route('userlogins') }}">Login</a></li>
               <li><a href="{{route('userregister')}}">Register</a></li>
-              <li><a href="{{route('showprofile')}}">My Profile</a></li>
+              <li><a href="">My Profile</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
@@ -193,6 +200,15 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('user/assets/js/main.js')}}"></script>
+
+
+  @if(Session::has('message'))
+  <script type="text/javascript">
+    $(function(){
+      $('#staticBackdropProfile').modal("show");
+    })
+  </script>
+  @endif
 
 </body>
 
